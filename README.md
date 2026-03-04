@@ -1,7 +1,18 @@
-# file structure
+# game
 
+random game I made on Godot that has no middle or end. mostly just me messing around.
+
+## running the game
+
+1. download (and unzip) the repository (or do something else to download the entire folder)
+2. download the Godot editor binary
+3. drop the editor binary into the same folder as `project.godot`
+4. run the editor binary; it will run the project
+
+## file structure
 
 - **res://**
+- **res://music** - contains music
 - **res://multilevel** - contains files for multiple levels
 - **res://multilevel/assets/** - contains assets
 - **res://multilevel/assets/fonts/** - contains font files and font images
