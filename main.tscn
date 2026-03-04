@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://buaq673iyr04d"]
+
+[ext_resource type="Script" uid="uid://deslknst0r4p" path="res://multilevel/scripts/main.gd" id="1_1bvp3"]
+[ext_resource type="Texture2D" uid="uid://coaqbi3o01pim" path="res://multilevel/assets/images/crosshair.png" id="1_272bh"]
+[ext_resource type="Script" uid="uid://c4fuvna5sv737" path="res://multilevel/scripts/classes/PlayerCharacterBody3D.gd" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://cloufh7bgpauc" path="res://scenes/0_platform/platform.tscn" id="3_h2yge"]
+[ext_resource type="PackedScene" uid="uid://dbotfuk1ejefr" path="res://scenes/1_building/building.tscn" id="3_lquwl"]
+[ext_resource type="PackedScene" uid="uid://c0k5dj0g8gwoj" path="res://scenes/2_white/white.tscn" id="4_7mycd"]
+[ext_resource type="PackedScene" uid="uid://diq3ccbnd4ij2" path="res://scenes/3_greenrooms/greenrooms.tscn" id="5_272bh"]
+[ext_resource type="PackedScene" uid="uid://vi0bcpk4v701" path="res://scenes/4_something/something.tscn" id="6_4c57u"]
+[ext_resource type="PackedScene" uid="uid://b4gap0ilyuok2" path="res://scenes/-2_greenrooms_stuck/greenrooms_stuck.tscn" id="6_5vw27"]
+[ext_resource type="PackedScene" uid="uid://d2aswd344hosq" path="res://scenes/-1_no_items_platform/no_items_platform.tscn" id="6_kek77"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_1bvp3"]
+radius = 0.3
+height = 1.3
+radial_segments = 16
+
+[node name="Main" type="Node3D" unique_id=1573531128 node_paths=PackedStringArray("player")]
+script = ExtResource("1_1bvp3")
+player = NodePath("PlayerCharacterBody3D")
+levels = Array[PackedScene]([ExtResource("3_h2yge"), ExtResource("3_lquwl"), ExtResource("4_7mycd"), ExtResource("5_272bh"), ExtResource("6_4c57u"), ExtResource("5_272bh")])
+endings = Array[PackedScene]([null, ExtResource("6_kek77"), ExtResource("6_5vw27")])
+
+[node name="UI" type="Control" parent="." unique_id=1981496727]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Crosshair" type="TextureRect" parent="UI" unique_id=437072521]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.25, 0.25)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("1_272bh")
+
+[node name="PlayerCharacterBody3D" type="CharacterBody3D" parent="." unique_id=631369480 node_paths=PackedStringArray("camera_ui", "crosshair")]
+collision_mask = 33
+floor_block_on_wall = false
+platform_floor_layers = 4278190081
+script = ExtResource("1_ig7tw")
+camera_ui = NodePath("../UI")
+crosshair = NodePath("../UI/Crosshair")
+metadata/_custom_type_script = "uid://c4fuvna5sv737"
+
+[node name="shadowmesh" type="MeshInstance3D" parent="PlayerCharacterBody3D" unique_id=2133991928]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0559022e-10, 0.65, -3.0559022e-10)
+cast_shadow = 3
+mesh = SubResource("CapsuleMesh_1bvp3")

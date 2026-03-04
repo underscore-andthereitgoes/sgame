@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://cws2c812dlyv4"]
+
+[ext_resource type="Script" uid="uid://cfbtykvmn5aq6" path="res://@#.test/test.gd" id="1_2x2w8"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2x2w8"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_5qk1k"]
+sky_material = SubResource("ProceduralSkyMaterial_2x2w8")
+
+[sub_resource type="Environment" id="Environment_7thax"]
+background_mode = 1
+background_color = Color(0, 0, 0, 0)
+sky = SubResource("Sky_5qk1k")
+ambient_light_source = 3
+ambient_light_color = Color(1, 1, 1, 1)
+reflected_light_source = 2
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="TorusMesh" id="TorusMesh_xebg2"]
+
+[node name="a" type="Control" unique_id=662214742]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2x2w8")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=1198336573]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -500.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=902069538]
+transparent_bg = true
+size = Vector2i(652, 648)
+render_target_clear_mode = 1
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/SubViewport" unique_id=1281236167]
+environment = SubResource("Environment_7thax")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport" unique_id=2098473728]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport" unique_id=1572485041]
+current = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport" unique_id=1207140635]
+transform = Transform3D(1, 0, 0, 0, 0.31912172, -0.94771373, 0, 0.94771373, 0.31912172, 0, 0, -2.3049266)
+mesh = SubResource("TorusMesh_xebg2")
+
+[node name="img" type="TextureRect" parent="." unique_id=256869634]
+z_index = -1
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0

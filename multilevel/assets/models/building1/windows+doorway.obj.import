@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://b7sx270nexqo"
+path="res://.godot/imported/windows+doorway.obj-26878b09f374cace2c16caaae8189230.mesh"
+
+[deps]
+
+files=["res://.godot/imported/windows+doorway.obj-26878b09f374cace2c16caaae8189230.mesh"]
+
+source_file="res://multilevel/assets/models/building1/windows+doorway.obj"
+dest_files=["res://.godot/imported/windows+doorway.obj-26878b09f374cace2c16caaae8189230.mesh", "res://.godot/imported/windows+doorway.obj-26878b09f374cace2c16caaae8189230.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

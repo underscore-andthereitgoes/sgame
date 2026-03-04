@@ -1,0 +1,129 @@
+[gd_scene format=3 uid="uid://b4gap0ilyuok2"]
+
+[ext_resource type="Script" uid="uid://dmxeo4fs2gdla" path="res://scenes/-2_greenrooms_stuck/greenrooms_stuck_main.gd" id="1_kyl7i"]
+[ext_resource type="Material" uid="uid://dbne10jt720v2" path="res://scenes/3_greenrooms/materials/wall.material" id="2_acrgb"]
+[ext_resource type="Material" uid="uid://c84pmjxlts4gm" path="res://scenes/3_greenrooms/materials/floor.material" id="3_acrgb"]
+[ext_resource type="Material" uid="uid://l7xp1fgkr43q" path="res://scenes/3_greenrooms/materials/ceiling.material" id="4_rk852"]
+[ext_resource type="FontFile" uid="uid://bgl2ul4ci3csa" path="res://multilevel/assets/fonts/Noto_Sans/NotoSans-VariableFont_wdth,wght.ttf" id="5_xib6w"]
+[ext_resource type="Script" uid="uid://81dfhea0kh54" path="res://multilevel/scripts/classes/StatsLabel.gd" id="6_acrgb"]
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_c78kk"]
+
+[sub_resource type="Sky" id="Sky_3kw3l"]
+sky_material = SubResource("PhysicalSkyMaterial_c78kk")
+
+[sub_resource type="Environment" id="Environment_nljdc"]
+background_mode = 4
+sky = SubResource("Sky_3kw3l")
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+reflected_light_source = 1
+tonemap_agx_white = 16.0
+tonemap_agx_contrast = 1.5
+ssao_enabled = true
+glow_enabled = true
+glow_levels/1 = 0.4
+glow_levels/3 = 0.5
+glow_levels/4 = 0.0
+fog_depth_curve = 2.0
+fog_depth_begin = 0.0
+fog_depth_end = 40.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_kyl7i"]
+material = ExtResource("2_acrgb")
+flip_faces = true
+size = Vector3(3, 4, 3)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_acrgb"]
+material = ExtResource("3_acrgb")
+size = Vector2(4, 4)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_xib6w"]
+material = ExtResource("4_rk852")
+size = Vector2(4, 4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2a681"]
+albedo_color = Color(0.5019608, 0, 0, 1)
+
+[sub_resource type="TextMesh" id="TextMesh_rk852"]
+material = SubResource("StandardMaterial3D_2a681")
+text = "STUCK IN THE GREENROOMS
+Ending #2"
+font = ExtResource("5_xib6w")
+font_size = 20
+depth = 0.02
+
+[sub_resource type="FontVariation" id="FontVariation_acrgb"]
+base_font = ExtResource("5_xib6w")
+variation_opentype = {
+2003072104: 100,
+2003265652: 600
+}
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_acrgb"]
+
+[node name="GreenroomsStuck" type="Node3D" unique_id=1355031985 node_paths=PackedStringArray("statslabel", "world_environment")]
+script = ExtResource("1_kyl7i")
+statslabel = NodePath("statslabel")
+world_environment = NodePath("WorldEnvironment")
+metadata/_custom_type_script = "uid://d0l10gggeusje"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2045294576]
+environment = SubResource("Environment_nljdc")
+
+[node name="walls" type="MeshInstance3D" parent="." unique_id=441436245]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0559022e-10, 1.5, -3.0559022e-10)
+cast_shadow = 0
+mesh = SubResource("BoxMesh_kyl7i")
+
+[node name="floor" type="MeshInstance3D" parent="." unique_id=2032136087]
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_acrgb")
+
+[node name="ceiling" type="MeshInstance3D" parent="." unique_id=1343954875]
+transform = Transform3D(1, 0, 0, 0, -1, 8.742278e-08, 0, -8.742278e-08, -1, -3.0559022e-10, 3, -3.0559022e-10)
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_xib6w")
+
+[node name="endinglabel" type="MeshInstance3D" parent="." unique_id=857279406]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0559022e-10, 2, -1.5)
+cast_shadow = 0
+mesh = SubResource("TextMesh_rk852")
+
+[node name="statslabel" type="Label3D" parent="." unique_id=335964458]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0559022e-10, 1, -1.49)
+pixel_size = 0.001
+modulate = Color(0, 0, 0, 1)
+text = "Time: {time}
+Distance Travelled: {distance_travelled}
+Jumps: {jumps}"
+font = SubResource("FontVariation_acrgb")
+font_size = 120
+outline_size = 0
+script = ExtResource("6_acrgb")
+metadata/_custom_type_script = "uid://81dfhea0kh54"
+
+[node name="body" type="StaticBody3D" parent="." unique_id=2076729925]
+
+[node name="colliderfloor" type="CollisionShape3D" parent="body" unique_id=769257051]
+shape = SubResource("WorldBoundaryShape3D_acrgb")
+
+[node name="colliderceiling" type="CollisionShape3D" parent="body" unique_id=577107697]
+transform = Transform3D(1, 0, 0, 0, -1, 8.742278e-08, 0, -8.742278e-08, -1, -3.0559022e-10, 3, -3.0559022e-10)
+shape = SubResource("WorldBoundaryShape3D_acrgb")
+
+[node name="colliderwall1" type="CollisionShape3D" parent="body" unique_id=937988932]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, -3.0559022e-10, -3.0559022e-10, -1.5)
+shape = SubResource("WorldBoundaryShape3D_acrgb")
+
+[node name="colliderwall2" type="CollisionShape3D" parent="body" unique_id=1248965356]
+transform = Transform3D(-4.371139e-08, 1, -4.371139e-08, 0, -4.371139e-08, -1, -1, -4.371139e-08, 1.9106855e-15, -1.5, -3.0559022e-10, -3.0559022e-10)
+shape = SubResource("WorldBoundaryShape3D_acrgb")
+
+[node name="colliderwall3" type="CollisionShape3D" parent="body" unique_id=564713265]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -3.0559022e-10, -3.0559022e-10, 1.5)
+shape = SubResource("WorldBoundaryShape3D_acrgb")
+
+[node name="colliderwall4" type="CollisionShape3D" parent="body" unique_id=2015961586]
+transform = Transform3D(-4.371139e-08, -1, -4.371139e-08, 0, -4.371139e-08, 1, -1, 4.371139e-08, 1.9106855e-15, 1.5, -3.0559022e-10, -3.0559022e-10)
+shape = SubResource("WorldBoundaryShape3D_acrgb")

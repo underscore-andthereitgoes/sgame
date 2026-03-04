@@ -1,0 +1,26 @@
+# Blender 5.0.1 MTL File: 'None'
+# www.blender.org
+
+newmtl lightbulb_01_base
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd ../../../../../../../lightbulb_01_diff_4k000.jpg
+map_Ns ../../../../../../../lightbulb_01_rough_4k000.exr
+map_refl ../../../../../../../lightbulb_01_metal_4k000.exr
+map_Ke ../../../../../../../lightbulb_01_emissive_4k.jpg
+map_Bump -bm 1.000000 ../../../../../../../lightbulb_01_nor_gl_4k000.exr
+
+newmtl lightbulb_01_glass
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+illum 2
+map_Kd ../../../../../../../lightbulb_01_diff_4k.jpg
+map_Ns ../../../../../../../lightbulb_01_rough_4k.exr
+map_refl ../../../../../../../lightbulb_01_metal_4k.exr
+map_d ../../../../../../../lightbulb_01_alpha_4k.jpg
+map_Bump -bm 1.000000 ../../../../../../../lightbulb_01_nor_gl_4k.exr

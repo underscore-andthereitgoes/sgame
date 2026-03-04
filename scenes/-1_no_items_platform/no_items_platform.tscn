@@ -1,0 +1,84 @@
+[gd_scene format=3 uid="uid://d2aswd344hosq"]
+
+[ext_resource type="Script" uid="uid://bxcht65ihrlrl" path="res://scenes/-1_no_items_platform/no_items_platform_main.gd" id="1_7jtvv"]
+[ext_resource type="Shader" uid="uid://dgxelk4fpflp1" path="res://multilevel/shaders/checkerboard.gdshader" id="2_dotyg"]
+[ext_resource type="FontFile" uid="uid://bgl2ul4ci3csa" path="res://multilevel/assets/fonts/Noto_Sans/NotoSans-VariableFont_wdth,wght.ttf" id="3_1r2di"]
+[ext_resource type="Script" uid="uid://81dfhea0kh54" path="res://multilevel/scripts/classes/StatsLabel.gd" id="4_0nqii"]
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_dotyg"]
+ground_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Sky" id="Sky_la2di"]
+sky_material = SubResource("PhysicalSkyMaterial_dotyg")
+
+[sub_resource type="Environment" id="Environment_wgoyu"]
+background_mode = 2
+sky = SubResource("Sky_la2di")
+ambient_light_color = Color(1, 1, 1, 1)
+ssr_enabled = true
+glow_enabled = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wgoyu"]
+render_priority = 0
+shader = ExtResource("2_dotyg")
+shader_parameter/color1 = Vector3(0.8, 0.8, 0.8)
+shader_parameter/color2 = Vector3(1, 1, 1)
+shader_parameter/decrease_normal = 0.125
+shader_parameter/checkercube_size = Vector3(2, 2, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4fvq8"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="TextMesh" id="TextMesh_co1ta"]
+material = SubResource("StandardMaterial3D_4fvq8")
+text = "NO ITEMS LEFT
+Ending #1"
+font = ExtResource("3_1r2di")
+font_size = 20
+depth = 0.02
+
+[sub_resource type="FontVariation" id="FontVariation_s3cj7"]
+base_font = ExtResource("3_1r2di")
+variation_opentype = {
+2003072104: 100,
+2003265652: 600
+}
+
+[node name="NoItemsPlatform" type="Node3D" unique_id=1704191873 node_paths=PackedStringArray("statslabel")]
+script = ExtResource("1_7jtvv")
+statslabel = NodePath("statslabel")
+
+[node name="Sunlight" type="DirectionalLight3D" parent="." unique_id=1836674366]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=540304329]
+environment = SubResource("Environment_wgoyu")
+
+[node name="WorldCSG" type="CSGCombiner3D" parent="." unique_id=141931958]
+cast_shadow = 0
+use_collision = true
+
+[node name="Box" type="CSGBox3D" parent="WorldCSG" unique_id=632539068]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0559022e-10, -1, -3.0559022e-10)
+cast_shadow = 0
+size = Vector3(500, 2, 500)
+material = SubResource("ShaderMaterial_wgoyu")
+
+[node name="endinglabel" type="MeshInstance3D" parent="." unique_id=159877002]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0559022e-10, 1.5, -1.5)
+cast_shadow = 0
+mesh = SubResource("TextMesh_co1ta")
+
+[node name="statslabel" type="Label3D" parent="." unique_id=90764428]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0559022e-10, 0.5, -1.49)
+pixel_size = 0.001
+modulate = Color(0, 0, 0, 1)
+text = "Time: {time}
+Distance Travelled: {distance_travelled}
+Jumps: {jumps}"
+font = SubResource("FontVariation_s3cj7")
+font_size = 120
+outline_size = 0
+script = ExtResource("4_0nqii")
+metadata/_custom_type_script = "uid://81dfhea0kh54"
